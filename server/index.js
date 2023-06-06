@@ -12,7 +12,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 // Your endpoints here..
-
+app.get('/message', cors(corsOptions), async (req, res) => {
+    res.send({message: 'Hello world!!!'})
+  })
 
 app.listen(PORT, () => {
     console.log(`Express web API running on port: ${PORT}.`)
