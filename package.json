@@ -1,11 +1,11 @@
 {
   "name": "javascript-node",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Project used to illustrate Node, Express and MySQL.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +16,14 @@
     "express-validator": "^7.0.1",
     "lodash": "^4.17.21",
     "mysql2": "^3.2.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nportalatin21/node-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nportalatin21/node-js/issues"
+  },
+  "homepage": "https://github.com/nportalatin21/node-js#readme"
 }
