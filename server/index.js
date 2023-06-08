@@ -71,6 +71,11 @@ app.put('/cars', cors(corsOptions), async (req, res) => {
   res.send(newCar);
 })
 
+app.delete('/cars/:id', cors(corsOptions), async (req, res) => {
+    const carId = req.params['id']
+    const results = await mySqlProxy.deleteCar(carId)
+    res.send(results)
+})
 
 
 
