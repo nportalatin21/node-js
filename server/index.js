@@ -42,38 +42,72 @@ app.get('/persons/', cors(corsOptions), async (req,res) => {
 
 
 // Car ID
-app.get('/car/:id', cors(corsOptions), async (req, res) => { 
+app.get('/car/:id', cors(corsOptions), param('id').isNumeric(), async (req, res) => { 
+
+  const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+           return res.status(400).json({ errors: errors.array() })  
+        }
   const carId = req.params['id']
   const car = await mySqlProxy.selectCarById(carId)
+  car ? res.send(car) : res.status(404).send({message: 'Not found.'})
+  
   res.send(car)
 })
 
 //Car Make 
 app.get('/cars', cors(corsOptions), async (req,res) => {
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })  
+ }
+  
   const make = req.query.make
   const cars = await mySqlProxy.selectCarByMake(make);
+  cars ? res.send(cars) : res.status(404).send({message: 'Not found.'})
   res.send(cars);
 
 })
 
 //Car post (adding)
 app.post('/cars/', cors(corsOptions), async (req, res) => { 
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })  
+ }
+
   const car = req.body 
   const newCar = await mySqlProxy.insertCar(car)
+  newCar ? res.send(newCar) : res.status(404).send({message: 'Not found.'})
   res.send(newCar)
 })
 
 //Car Put
 
 app.put('/cars', cors(corsOptions), async (req, res) => { 
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })  
+ }
+
   const car = req.body 
   const newCar = await mySqlProxy.updateCar(car)
+  newCar ? res.send(newCar) : res.status(404).send({message: 'Not found.'})
   res.send(newCar);
 })
 
-app.delete('/cars/:id', cors(corsOptions), async (req, res) => {
+app.delete('/cars/:id', cors(corsOptions), param('id').isNumeric(), async (req, res) => {
+
+          // Validate...
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+
     const carId = req.params['id']
     const results = await mySqlProxy.deleteCar(carId)
+    results ? res.send(results) : res.status(404).send({message: 'Not found.'})
     res.send(results)
 })
 
