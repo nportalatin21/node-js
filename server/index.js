@@ -34,6 +34,7 @@ app.get('/persons/', cors(corsOptions), async (req,res) => {
     res.send(persons);
 })
 
+
 // app.get('/cars/', cors(corsOptions), async (req,res) => {
 //   const cars = await mySqlProxy.selectCars();
 //   res.send(cars);
@@ -54,6 +55,15 @@ app.get('/cars', cors(corsOptions), async (req,res) => {
   res.send(cars);
 
 })
+
+//Car post (adding)
+app.post('/cars/', cors(corsOptions), async (req, res) => { 
+  const car = req.body 
+  console.log(car)
+  const newCar = await mySqlProxy.insertCar(car)
+  res.send(newCar)
+})
+
 
 
 
